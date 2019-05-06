@@ -1,0 +1,46 @@
+Sub highlightChanged()
+
+ Dim myRev As Revision
+ Dim newDoc As Document
+
+ ActiveDocument.TrackRevisions = False
+
+ If ActiveDocument.Path <> "" Then
+  If ActiveDocument.Saved = True Then
+   Set newDoc = Documents.Add(Template:=ActiveDocument.FullName)
+  Else
+   If MsgBox("Save" & vbCr & _
+        "Save?", vbYesNo, "If") = vbYes Then
+    ActiveDocument.Save
+    Set newDoc = Documents.Add(Template:=ActiveDocument.FullName)
+   Else
+    Exit Sub
+   End If
+  End If
+ Else
+  MsgBox "Please save"
+  Exit Sub
+ End If
+
+ newDoc.Range.HighlightColorIndex = wdNoHighlight
+
+ For Each myRev In newDoc.Revisions
+
+  Select Case myRev.Type
+
+   Case wdRevisionInsert
+    With myRev.Range
+     .Font.Color = wdColorRed
+    End With
+
+  End Select
+
+  myRev.Accept
+
+ Next
+
+ Set myRev = Nothing
+ Set newDoc = Nothing
+
+End Sub
+
