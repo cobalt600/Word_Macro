@@ -3,6 +3,7 @@
 # 論文執筆のときに変更箇所（追記箇所）を赤字にするマクロ
 ## 参考にしたもの
 https://xp-song.github.io/posts/trackchange-word/
+
 https://qiita.com/yuifu/items/821def235673068eb6ea
 
 ## 大きな流れ
